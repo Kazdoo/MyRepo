@@ -6,7 +6,7 @@ from pygame import *
 from pygame.locals import *
 from pygame.sprite import *
 
-#yoyo
+
 
 
 WIDTH = 1024
@@ -52,17 +52,22 @@ def main():
 
     pygame.init()
 
-    while True:
-        e = event.wait()
-        if e.type == QUIT:
-            pygame.quit()
-            break
-        elif e.type == MOUSEBUTTONDOWN:
-            if my_mole1.rect.collidepoint (mouse.get_pos()):
-                my_mole1.flee()
-            
-            screen.fill(SCREEN)
-            all_sprites.draw(SCREEN)
+    clock = pygame.time.Clock()
+    run = True
+    while run:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                pygame.quit()
+
+
+            elif event.type == MOUSEBUTTONDOWN:
+                if my_mole1.rect.collidepoint (mouse.get_pos()):
+                    my_mole1.flee()
+                
+                screen.fill(SCREEN)
+                all_sprites.draw(SCREEN)
         display.update()
 
 
