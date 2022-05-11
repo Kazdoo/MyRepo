@@ -6,7 +6,7 @@ from pygame import *
 from pygame.locals import *
 from pygame.sprite import *
 
-
+#let's see where this goes
 
 
 WIDTH = 1024
