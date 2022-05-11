@@ -5,16 +5,21 @@ import random
 from pygame import *
 from pygame.locals import *
 from pygame.sprite import *
-
-#let's see where this goes
-
+pygame.font.init()
+pygame.mixer.init()
 
 WIDTH = 1024
 HEIGHT = 768
-SCREEN = (255,255,255)
+WHITE = (255,255,255)
+WIN = display.set_mode ((WIDTH, HEIGHT)) # a surface
+SCORE_FONT = pygame.font.SysFont('comicsans', 40)
+WHACK_SOUND = pygame.mixer.Sound (os.path.join('Assets', 'whack.mp3'))
+FPS = 60
+
+AVOCADO_HIT = pygame.USEREVENT +1
+
 
 display.set_caption("wakamole")
-screen = display.set_mode ((WIDTH, HEIGHT)) # a surface
 
 
 class Mole (Sprite):
@@ -62,12 +67,12 @@ def main():
                 pygame.quit()
 
 
-            elif event.type == MOUSEBUTTONDOWN:
+            if event.type == MOUSEBUTTONDOWN:
                 if my_mole1.rect.collidepoint (mouse.get_pos()):
                     my_mole1.flee()
                 
-                screen.fill(SCREEN)
-                all_sprites.draw(SCREEN)
+                WIN.fill(WHITE)
+                all_sprites.draw(WHITE)
         display.update()
 
 
