@@ -5,7 +5,7 @@ import os
 
 
 
-gravity = 0.0500
+gravity = 0.0600
 
 class QueenSprite:
     def __init__ (self, img, target_posn):
