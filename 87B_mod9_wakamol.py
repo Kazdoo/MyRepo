@@ -12,12 +12,19 @@ WIDTH = 900
 HEIGHT = 500
 WHITE = (255,255,255)
 WIN = pygame.display.set_mode ((WIDTH, HEIGHT)) # a surface
-SCORE_FONT = pygame.font.SysFont('comicsans', 40)
-#WHACK_SOUND = pygame.mixer.Sound (os.path.join('Assets', 'whack.mp3'))
+BACKGROUND = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'background.png')), (WIDTH, HEIGHT))
+BORDER = pygame.Rect(WIDTH, 0, 10, HEIGHT)
 FPS = 60
 
-AVOCADO_HIT = pygame.USEREVENT +1
+#SCORE_FONT = pygame.font.SysFont('comicsans', 40)
+#WHACK_SOUND = pygame.mixer.Sound (os.path.join('Assets', 'whack.mp3'))
+#AVOCADO_HIT = pygame.USEREVENT +1
 
+AVOCADO_WIDTH, AVOCADO_HEIGHT = 50,40
+AVOCADO_IMAGE = image.load (os.path.join('Assets', 'avocado.png'))
+AVOCADO = pygame.transform.scale(AVOCADO_IMAGE, (AVOCADO_WIDTH,AVOCADO_HEIGHT))
+
+    
 
 display.set_caption("G-wakamole")
 
@@ -25,16 +32,15 @@ display.set_caption("G-wakamole")
 class Mole (Sprite):
     def __init__(self):
         Sprite.__init__(self)
-        self.image = image.load (os.path.join('Assets', 'avocado.png')).convert()
+        self.image = image.load(os.path.join('Assets', 'avocado.png'))
         self.rect = self.image.get_rect()
 
     def flee (self):
-        self.rect.left = random.randint(0,600)
-        self.rect.top =random.randint(0,400)
+        self.rect.left = random.randint(0,WIDTH)
+        self.rect.top =random.randint(0,HEIGHT)
 
     def handle_click(self):
         return
-
 
 
 class Banner (Sprite):
@@ -46,28 +52,31 @@ class Banner (Sprite):
 
 
 
-def update(self):
-    self.rect = self.rect.move(3,0)
-
-
-my_mole1 = Mole()
-my_mole2 = Mole()
-all_sprites = Group(my_mole1, my_mole2)
-
-
-
-def draw_window():
-    pygame.draw.rect(WIN, WHITE, )
-    #surface = pygame.display.set_mode (WIDTH, HEIGHT)
-
-    WIN.fill(WHITE)
-    all_sprites.draw(WHITE)
-    display.update()
-
-
-
 def main():
     #the event loop
+    pygame.init()
+
+    #instantiate 2 mules instances, put them on the board
+    my_mole1 = Mole()
+    my_mole2 = Mole()
+    all_sprites = Group(my_mole1, my_mole2)
+    
+    
+    WIN.blit(BACKGROUND, (0,0))
+    pygame.draw.rect(WIN, WHITE, BORDER)
+    #surface = pygame.display.set_mode (WIDTH, HEIGHT)
+
+
+
+
+    for sprite in all_sprites:
+        sprite.draw(WIN)        
+
+    
+
+
+    display.update()
+
 
     pygame.init()
 
@@ -91,7 +100,7 @@ def main():
                 
 
 
-        draw_window()
+        #draw_window()
 
 if __name__ == "__main__":
     main()
