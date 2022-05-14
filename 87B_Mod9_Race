@@ -20,19 +20,21 @@ from pygame.sprite import *
 pygame.mixer.init()
 pygame.font.init()
 
-
+#creating a lot of global variables to be able to easily change the difficulty of the game
 WIDTH, HEIGHT = 900, 500
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption ("Guack me if you can")
 FPS = 120
 BACKGROUND = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'background.png')), (WIDTH, HEIGHT))
-VEL = 3 #velocity
-HIT_SOUND =  pygame.mixer.Sound (os.path.join('Assets', 'splooge.wav'))
+
+VEL = 3 #velocity for player movement.
+HIT_SOUND =  pygame.mixer.Sound (os.path.join('Assets', 'splooge.wav')) #what does a whack avocado sounds like?
 
 PLAYER_WIDTH, PLAYER_HEIGHT = 100,100
 AVOCADO_IMAGE =pygame.image.load (os.path.join('Assets', 'avo.png'))
 AVOCADO = pygame.transform.scale(AVOCADO_IMAGE, (PLAYER_WIDTH,PLAYER_HEIGHT))
 
+#this is for the scoring system
 WHACK = pygame.USEREVENT +1
 SCORE_FONT = pygame.font.SysFont('comicsans', 40)
 SCORE = 0
@@ -55,8 +57,8 @@ class Player (Sprite):
     def handle_click(self):
 
         #if avocado is clicked, we move it to a random position
-        x = random.randint(0,WIDTH)
-        y = random.randint(0,HEIGHT)        
+        x = random.randint(0,WIDTH-PLAYER_WIDTH)
+        y = random.randint(0,HEIGHT-PLAYER_HEIGHT)        
         self.posn = (x,y)
         pygame.event.post(pygame.event.Event(WHACK))
         HIT_SOUND.play()
