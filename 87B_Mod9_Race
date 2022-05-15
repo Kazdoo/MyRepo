@@ -56,7 +56,7 @@ class Player (Sprite):
 
     def handle_click(self):
 
-        #if avocado is clicked, we move it to a random position
+        #if avocado is clicked, we move it to a random position, play a sound and increase score by 1
         x = random.randint(0,WIDTH-PLAYER_WIDTH)
         y = random.randint(0,HEIGHT-PLAYER_HEIGHT)        
         self.posn = (x,y)
@@ -89,7 +89,6 @@ class Player (Sprite):
             new_y = HEIGHT-PLAYER_HEIGHT
 
         self.posn = (new_x, new_y)
-
     
     
 def avocado_handle_movement(keys_pressed, avocado):
@@ -109,7 +108,7 @@ def score_update (score):
     score_text = SCORE_FONT.render("Whack O Meter:" + str (score), 1, (255,255,255))
     WIN.blit(score_text, (10,10))
     
-    
+ 
 
 
 def main():
