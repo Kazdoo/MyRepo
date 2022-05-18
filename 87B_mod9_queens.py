@@ -90,7 +90,7 @@ def draw_board(the_board):
     sq_sz       = surface_sz // n #how many square can we cut?
     surface_sz  = n * sq_sz #final size
     
-    ball        =pygame.transform.scale(pygame.image.load (os.path.join('Assets', 'avocado2.png')), ((surface_sz//n),(surface_sz//n)))
+    ball        =pygame.transform.scale(pygame.image.load (os.path.join('Assets', 'avo.png')), ((surface_sz//n),(surface_sz//n)))
     ball_offset = (sq_sz - ball.get_width())//2
 
     #load the sprite sheet
@@ -101,9 +101,6 @@ def draw_board(the_board):
     duke2 = DukeSprite(duke_sprite_sheet, (sq_sz*5, sq_sz))
     
     #add them to the list of sprites which our game loop manages
-
-
-
 
     surface = pygame.display.set_mode ((surface_sz, surface_sz))
 
